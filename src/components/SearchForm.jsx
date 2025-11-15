@@ -18,12 +18,9 @@ export default function SearchForm() {
   return (
     <form onSubmit={(e) => e.preventDefault()}>
       {/* ===== صف الحقول ===== */}
-      <div
-        className="d-flex align-items-end justify-content-between flex-wrap"
-        style={{ gap: "10px" }}
-      >
+      <div className="row g-3 align-items-end justify-content-center">
         {/* Destination */}
-        <div style={{ flex: "1 1 30%" }}>
+        <div className="col-lg-2 col-md-6 col-sm-12">
           <label className="form-label fw-semibold text-secondary mb-1">
             Destination
           </label>
@@ -42,10 +39,10 @@ export default function SearchForm() {
           </div>
         </div>
 
-        {/* Check-in */}
-        <div style={{ flex: "1 1 17%" }}>
+        {/* Check‑in */}
+        <div className="col-lg-3 col-md-4 col-sm-6">
           <label className="form-label fw-semibold text-secondary mb-1">
-            Check-in
+            Check‑in
           </label>
           <div className="input-group">
             <span className="input-group-text bg-white border-end-0">
@@ -61,10 +58,10 @@ export default function SearchForm() {
           </div>
         </div>
 
-        {/* Check-out */}
-        <div style={{ flex: "1 1 17%" }}>
+        {/* Check‑out */}
+        <div className="col-lg-3 col-md-4 col-sm-6">
           <label className="form-label fw-semibold text-secondary mb-1">
-            Check-out
+            Check‑out
           </label>
           <div className="input-group">
             <span className="input-group-text bg-white border-end-0">
@@ -81,7 +78,7 @@ export default function SearchForm() {
         </div>
 
         {/* Guests */}
-        <div style={{ flex: "1 1 17%" }}>
+        <div className="col-lg-2 col-md-4 col-sm-6">
           <label className="form-label fw-semibold text-secondary mb-1">
             Guests
           </label>
@@ -95,26 +92,26 @@ export default function SearchForm() {
               onChange={(e) => setGuests(e.target.value)}
               style={{ height: fieldHeight }}
             >
-              <option>1 Adult</option>
-              <option>2 Adults</option>
-              <option>3 Adults</option>
+              <option>1 Adult</option>
+              <option>2 Adults</option>
+              <option>3 Adults</option>
               <option>Family</option>
             </select>
           </div>
         </div>
 
         {/* زر البحث */}
-        <div style={{ flex: "1 1 15%" }}>
+        <div className="col-lg-1 col-md-6 col-sm-12 d-grid">
           <button
-            className="btn fw-bold text-white w-100"
+            className="btn fw-bold text-white"
             style={{
               backgroundColor: "#f59e0b",
-              height: 47,
-             
+              height: fieldHeight,
+              fontSize: "15px",
             }}
           >
             <FaSearch className="me-2" />
-            Search Hotels
+            Search Hotels
           </button>
         </div>
       </div>
@@ -136,11 +133,13 @@ export default function SearchForm() {
             <input type="checkbox" className="form-check-input me-1" /> Spa
           </label>
         </div>
+
         <div
-          className="text-primary fw-semibold d-flex align-items-center"
+          className="text-primary fw-semibold d-flex align-items-center mt-3 mt-md-0"
           style={{ cursor: "pointer", fontSize: "14px" }}
         >
-          <FaSlidersH className="me-2" /> More Filters
+          <FaSlidersH className="me-2" />
+          More Filters
         </div>
       </div>
     </form>

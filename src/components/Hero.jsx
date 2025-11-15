@@ -8,7 +8,7 @@ export default function Hero() {
       style={{
         background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
         minHeight: "60vh",
-        paddingTop: "60px",
+        paddingTop: "180px",
         paddingBottom: "120px",
       }}
     >
