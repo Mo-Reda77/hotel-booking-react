@@ -48,7 +48,9 @@ export default function Navbar() {
         className="py-2 border-bottom small"
         style={{ color: "#555", fontSize: "14px" }}
       >
-        <div className="container d-flex justify-content-between align-items-center flex-wrap gap-2">
+        <div
+          className="container d-flex justify-content-between align-items-center flex-wrap gap-2 flex-column flex-md-row text-center text-md-start"
+        >
           {/* Left side */}
           <div className="d-flex align-items-center flex-wrap gap-4">
             <span className="fw-bold text-primary d-flex align-items-center">
