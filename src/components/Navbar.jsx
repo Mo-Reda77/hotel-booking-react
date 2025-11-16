@@ -54,10 +54,12 @@ export default function Navbar() {
             <span className="fw-bold text-primary d-flex align-items-center">
               <FaHotel className="me-2 fs-4" /> Bookify
             </span>
-            <span className="d-flex align-items-center">
+            
+            {/* phone and email only visible on large screens */}
+            <span className="d-none d-md-flex align-items-center">
               <FaPhoneAlt className="me-2 text-primary" /> +01065015885
             </span>
-            <span className="d-flex align-items-center">
+            <span className="d-none d-md-flex align-items-center">
               <FaEnvelope className="me-2 text-primary" /> mohamedredac7@gmail.com
             </span>
           </div>
@@ -146,118 +148,150 @@ export default function Navbar() {
 
           {/* ===== Menu items ===== */}
           <ul
-            className={`nav flex-column flex-md-row align-items-md-center mb-0 ${
-              menuOpen ? "d-flex" : "d-none d-md-flex"
-            }`}
-            style={{
-              gap: "10px",
-              backgroundColor: menuOpen ? "#fff" : "transparent",
-              position: menuOpen ? "absolute" : "static",
-              top: menuOpen ? "70px" : "0",
-              left: 0,
-              right: 0,
-              padding: menuOpen ? "15px 25px" : "0",
-              borderBottom: menuOpen ? "1px solid #eee" : "none",
-              zIndex: 999,
-            }}
-          >
-            <li className="nav-item mx-1">
-              <Link to="/" className="nav-link fw-semibold text-dark">
-                <FaHome className="me-1" /> Home
-              </Link>
-            </li>
-            <li className="nav-item mx-1">
-              <ScrollLink
-                to="featured"
-                smooth
-                duration={800}
-                offset={-70}
-                className="nav-link fw-semibold text-dark"
-                style={{ cursor: "pointer" }}
-              >
-                <FaBuilding className="me-1" /> Hotels
-              </ScrollLink>
-            </li>
-            <li className="nav-item mx-1">
-              <ScrollLink
-                to="destinations"
-                smooth
-                duration={800}
-                offset={-70}
-                className="nav-link fw-semibold text-dark"
-                style={{ cursor: "pointer" }}
-              >
-                <FaMapMarkerAlt className="me-1" /> Destinations
-              </ScrollLink>
-            </li>
-            <li className="nav-item mx-1">
-              <ScrollLink
-                to="deals"
-                smooth
-                duration={800}
-                offset={-70}
-                className="nav-link fw-semibold text-dark"
-                style={{ cursor: "pointer" }}
-              >
-                <FaTags className="me-1" /> Deals
-              </ScrollLink>
-            </li>
-            <li className="nav-item mx-1">
-              <ScrollLink
-                to="about"
-                smooth
-                duration={800}
-                offset={-70}
-                className="nav-link fw-semibold text-dark"
-                style={{ cursor: "pointer" }}
-              >
-                <FaInfoCircle className="me-1" /> About
-              </ScrollLink>
-            </li>
-            <li className="nav-item mx-1">
-              <ScrollLink
-                to="contact"
-                smooth
-                duration={800}
-                offset={-70}
-                className="nav-link fw-semibold text-dark"
-                style={{ cursor: "pointer" }}
-              >
-                <FaHeadset className="me-1" /> Contact
-              </ScrollLink>
-            </li>
-          </ul>
-
-                     {/* ===== Search & Favorite (Desktop only) ===== */}
-          <div className="d-none d-md-flex align-items-center gap-3 ms-3">
-            {/* Search Box */}
-            <form
-              className="d-flex align-items-center border rounded-pill bg-light px-3"
-              style={{ flex: "0 0 320px", maxWidth: "320px", minWidth: "220px" }}
+              className={`nav flex-column flex-md-row align-items-md-center mb-0 ${
+                menuOpen ? "d-flex" : "d-none d-md-flex"
+              }`}
+              style={{
+                gap: "10px",
+                backgroundColor: menuOpen ? "#fff" : "transparent",
+                position: menuOpen ? "absolute" : "static",
+                top: menuOpen ? "70px" : "0",
+                left: 0,
+                right: 0,
+                padding: menuOpen ? "15px 25px" : "0",
+                borderBottom: menuOpen ? "1px solid #eee" : "none",
+                zIndex: 999,
+              }}
             >
-              <FaSearch className="text-secondary me-2" />
-              <input
-                type="text"
-                placeholder="Search hotels, destinations..."
-                className="form-control border-0 bg-light"
-                style={{ boxShadow: "none" }}
-              />
-            </form>
+              <li className="nav-item mx-1">
+                <Link
+                  to="/"
+                  className="nav-link fw-semibold text-dark"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaHome className="me-1" /> Home
+                </Link>
+              </li>
 
-            {/* Favorite Icon */}
-            <div
-              className="position-relative rounded-circle bg-light d-flex justify-content-center align-items-center"
-              style={{ width: "35px", height: "35px", cursor: "pointer" }}
-            >
-              <FaHeart className="text-secondary" />
-              <span
-                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                style={{ fontSize: "10px" }}
-              >
-                4
-              </span>
-            </div>
-          </div>
+              <li className="nav-item mx-1">
+                <ScrollLink
+                  to="featured"
+                  smooth
+                  duration={800}
+                  offset={-70}
+                  className="nav-link fw-semibold text-dark"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaBuilding className="me-1" /> Hotels
+                </ScrollLink>
+              </li>
+
+              <li className="nav-item mx-1">
+                <ScrollLink
+                  to="destinations"
+                  smooth
+                  duration={800}
+                  offset={-70}
+                  className="nav-link fw-semibold text-dark"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaMapMarkerAlt className="me-1" /> Destinations
+                </ScrollLink>
+              </li>
+
+              <li className="nav-item mx-1">
+                <ScrollLink
+                  to="deals"
+                  smooth
+                  duration={800}
+                  offset={-70}
+                  className="nav-link fw-semibold text-dark"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaTags className="me-1" /> Deals
+                </ScrollLink>
+              </li>
+
+              <li className="nav-item mx-1">
+                <ScrollLink
+                  to="about"
+                  smooth
+                  duration={800}
+                  offset={-70}
+                  className="nav-link fw-semibold text-dark"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaInfoCircle className="me-1" /> About
+                </ScrollLink>
+              </li>
+
+              <li className="nav-item mx-1">
+                <ScrollLink
+                  to="contact"
+                  smooth
+                  duration={800}
+                  offset={-70}
+                  className="nav-link fw-semibold text-dark"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => setMenuOpen(false)}
+                >
+                  <FaHeadset className="me-1" /> Contact
+                </ScrollLink>
+              </li>
+            </ul>
+
+                     {/* ===== Search & Favorite ===== */}
+<div
+  className={`align-items-center gap-3 ${
+    menuOpen ? "d-flex flex-column w-100 mt-3" : "d-none d-md-flex ms-3"
+  }`}
+  style={{
+    justifyContent: menuOpen ? "center" : "flex-end",
+  }}
+>
+  {/* ===== Search Box ===== */}
+  <form
+    className="d-flex align-items-center border rounded-pill bg-light px-3"
+    style={{
+      flex: "0 0 100%",
+      maxWidth: menuOpen ? "100%" : "320px",
+      minWidth: "200px",
+    }}
+  >
+    <FaSearch className="text-secondary me-2" />
+    <input
+      type="text"
+      placeholder="Search hotels, destinations..."
+      className="form-control border-0 bg-light"
+      style={{
+        boxShadow: "none",
+        fontSize: "14px",
+      }}
+    />
+  </form>
+
+  {/* ===== Favorite Icon ===== */}
+  <div
+    className="position-relative rounded-circle bg-light d-flex justify-content-center align-items-center"
+    style={{
+      width: "35px",
+      height: "35px",
+      cursor: "pointer",
+    }}
+  >
+    <FaHeart className="text-secondary" />
+    <span
+      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+      style={{ fontSize: "10px" }}
+    >
+      4
+    </span>
+  </div>
+</div>
         </div>
       </nav>
     </header>
