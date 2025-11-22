@@ -32,26 +32,17 @@ export default function Contact() {
 
             <form onSubmit={handleSubmit}>
               <div className="row g-2">
-                <div className="col-md-6">
+                
                   <input
-                    name="firstName"
+                    name="Username"
                     value={form.firstName}
                     onChange={handleChange}
                     type="text"
                     className="form-control"
-                    placeholder="First Name"
+                    placeholder="Username"
                   />
-                </div>
-                <div className="col-md-6">
-                  <input
-                    name="lastName"
-                    value={form.lastName}
-                    onChange={handleChange}
-                    type="text"
-                    className="form-control"
-                    placeholder="Last Name"
-                  />
-                </div>
+                
+                
               </div>
 
               <input
@@ -63,16 +54,7 @@ export default function Contact() {
                 placeholder="Email"
               />
 
-              <select
-                name="subject"
-                value={form.subject}
-                onChange={handleChange}
-                className="form-select mt-3"
-              >
-                <option>General Inquiry</option>
-                <option>Booking Support</option>
-                <option>Partnership</option>
-              </select>
+             
 
               <textarea
                 name="message"

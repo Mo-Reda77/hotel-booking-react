@@ -13,13 +13,12 @@ export default function Hero() {
       }}
     >
       {/* ===== عنوان الصفحة ===== */}
-      <h1 className="fw-bold display-5 mb-3">Find Your Perfect Stay</h1>
+      <h1 className="fw-bold display-5 mb-3">Welcome to the Grand Hotel</h1>
       <p
         className="lead mb-5"
         style={{ maxWidth: "650px", margin: "0 auto", lineHeight: "1.6" }}
       >
-        Discover amazing hotels, resorts, and accommodations worldwide with our
-        comprehensive booking platform.
+        Experience comfort, elegance, and exceptional service in the heart of Cairo.
       </p>
 
       {/* ===== صندوق البحث الأبيض ===== */}

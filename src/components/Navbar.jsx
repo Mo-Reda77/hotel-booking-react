@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import {
   FaHotel,
-  FaPhoneAlt,
-  FaEnvelope,
   FaHome,
   FaBuilding,
   FaTags,
@@ -14,7 +12,6 @@ import {
   FaGlobe,
   FaDollarSign,
   FaSearch,
-  FaHeart,
   FaBars,
   FaTimes,
 } from "react-icons/fa";
@@ -24,10 +21,13 @@ export default function Navbar() {
   const [currency, setCurrency] = useState("USD");
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll);
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(savedUser);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -51,24 +51,16 @@ export default function Navbar() {
         style={{ color: "#555", fontSize: "14px" }}
       >
         <div className="container d-flex justify-content-between align-items-center flex-wrap gap-2 flex-column flex-md-row">
-          {/* Left side */}
+          {/* شعار الفندق */}
           <div className="d-flex align-items-center flex-wrap gap-4">
             <span className="fw-bold text-primary d-flex align-items-center">
-              <FaHotel className="me-2 fs-4" /> Bookify
-            </span>
-
-            {/* phone and email only visible on large screens */}
-            <span className="d-none d-md-flex align-items-center">
-              <FaPhoneAlt className="me-2 text-primary" /> +01065015885
-            </span>
-            <span className="d-none d-md-flex align-items-center">
-              <FaEnvelope className="me-2 text-primary" /> mohamedredac7@gmail.com
+              <FaHotel className="me-2 fs-4" /> Grand Hotel
             </span>
           </div>
 
-          {/* Right side visible only on desktop */}
+          {/* يمين التوب بار */}
           <div className="d-none d-md-flex align-items-center flex-wrap gap-3">
-            {/* Language Dropdown */}
+            {/* لغة */}
             <div className="dropdown">
               <button
                 className="btn btn-sm dropdown-toggle text-secondary"
@@ -89,14 +81,6 @@ export default function Navbar() {
                 <li>
                   <button
                     className="dropdown-item"
-                    onClick={() => setLang("Français")}
-                  >
-                    🇫🇷 Français
-                  </button>
-                </li>
-                <li>
-                  <button
-                    className="dropdown-item"
                     onClick={() => setLang("العربية")}
                   >
                     🇪🇬 العربية
@@ -105,7 +89,7 @@ export default function Navbar() {
               </ul>
             </div>
 
-            {/* Currency Dropdown */}
+            {/* عملة */}
             <div className="dropdown">
               <button
                 className="btn btn-sm dropdown-toggle text-secondary"
@@ -123,31 +107,30 @@ export default function Navbar() {
                     USD – $
                   </button>
                 </li>
-                <li>
-                  <button
-                    className="dropdown-item"
-                    onClick={() => setCurrency("EGP")}
-                  >
-                    EGP – £
-                  </button>
-                </li>
               </ul>
             </div>
 
-            {/* Signin / Register */}
-            <Link to="/signin" className="btn btn-sm btn-outline-primary px-3">
-              Sign In
-            </Link>
-            <Link
-              to="/signup"
-              className="btn btn-sm text-white px-3"
-              style={{
-                background:
-                  "linear-gradient(90deg,#6d28d9 0%,#9333ea 50%,#a855f7 100%)",
-              }}
-            >
-              Register
-            </Link>
+            {/* أزرار التسجيل والدخول */}
+            {!user && (
+              <>
+                <Link
+                  to="/signin"
+                  className="btn btn-sm btn-outline-primary px-3"
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="btn btn-sm text-white px-3"
+                  style={{
+                    background:
+                      "linear-gradient(90deg,#6d28d9 0%,#9333ea 50%,#a855f7 100%)",
+                  }}
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -155,7 +138,7 @@ export default function Navbar() {
       {/* ======= Main Navbar ======= */}
       <nav className="py-3">
         <div className="container d-flex justify-content-between align-items-center">
-          {/* ===== Burger button + SignIn/Register for mobile ===== */}
+          {/* للموبايل */}
           <div className="d-flex align-items-center gap-2 d-md-none">
             <button
               className="btn"
@@ -165,30 +148,32 @@ export default function Navbar() {
               {menuOpen ? <FaTimes size={22} /> : <FaBars size={22} />}
             </button>
 
-            <div className="d-flex align-items-center gap-1">
-              <Link
-                to="/signin"
-                className="btn btn-sm btn-outline-primary"
-                style={{ fontSize: "13px", padding: "3px 10px" }}
-              >
-                Sign In
-              </Link>
-              <Link
-                to="/signup"
-                className="btn btn-sm text-white"
-                style={{
-                  fontSize: "13px",
-                  padding: "3px 10px",
-                  background:
-                    "linear-gradient(90deg,#6d28d9 0%,#9333ea 50%,#a855f7 100%)",
-                }}
-              >
-                Register
-              </Link>
-            </div>
+            {!user && (
+              <>
+                <Link
+                  to="/signin"
+                  className="btn btn-sm btn-outline-primary"
+                  style={{ fontSize: "13px", padding: "3px 10px" }}
+                >
+                  Sign In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="btn btn-sm text-white"
+                  style={{
+                    fontSize: "13px",
+                    padding: "3px 10px",
+                    background:
+                      "linear-gradient(90deg,#6d28d9 0%,#9333ea 50%,#a855f7 100%)",
+                  }}
+                >
+                  Register
+                </Link>
+              </>
+            )}
           </div>
 
-          {/* ===== Menu items ===== */}
+          {/* عناصر القائمة */}
           <ul
             className={`nav flex-column flex-md-row align-items-md-center mb-0 ${
               menuOpen ? "d-flex" : "d-none d-md-flex"
@@ -217,7 +202,7 @@ export default function Navbar() {
 
             <li className="nav-item mx-1">
               <ScrollLink
-                to="featured"
+                to="Room"
                 smooth
                 duration={800}
                 offset={-70}
@@ -225,13 +210,13 @@ export default function Navbar() {
                 style={{ cursor: "pointer" }}
                 onClick={() => setMenuOpen(false)}
               >
-                <FaBuilding className="me-1" /> Hotels
+                <FaBuilding className="me-1" /> Rooms
               </ScrollLink>
             </li>
 
             <li className="nav-item mx-1">
               <ScrollLink
-                to="destinations"
+                to="Offer"
                 smooth
                 duration={800}
                 offset={-70}
@@ -239,21 +224,7 @@ export default function Navbar() {
                 style={{ cursor: "pointer" }}
                 onClick={() => setMenuOpen(false)}
               >
-                <FaMapMarkerAlt className="me-1" /> Destinations
-              </ScrollLink>
-            </li>
-
-            <li className="nav-item mx-1">
-              <ScrollLink
-                to="deals"
-                smooth
-                duration={800}
-                offset={-70}
-                className="nav-link fw-semibold text-dark"
-                style={{ cursor: "pointer" }}
-                onClick={() => setMenuOpen(false)}
-              >
-                <FaTags className="me-1" /> Deals
+                <FaTags className="me-1" /> Offers
               </ScrollLink>
             </li>
 
@@ -286,10 +257,12 @@ export default function Navbar() {
             </li>
           </ul>
 
-          {/* ===== Search & Favorite ===== */}
+          {/* البحث */}
           <div
             className={`align-items-center gap-3 ${
-              menuOpen ? "d-flex flex-column w-100 mt-3" : "d-none d-md-flex ms-3"
+              menuOpen
+                ? "d-flex flex-column w-100 mt-3"
+                : "d-none d-md-flex ms-3"
             }`}
             style={{
               justifyContent: menuOpen ? "center" : "flex-end",
@@ -306,7 +279,7 @@ export default function Navbar() {
               <FaSearch className="text-secondary me-2" />
               <input
                 type="text"
-                placeholder="Search hotels, destinations..."
+                placeholder="Search rooms or offers..."
                 className="form-control border-0 bg-light"
                 style={{
                   boxShadow: "none",
@@ -314,23 +287,6 @@ export default function Navbar() {
                 }}
               />
             </form>
-
-            <div
-              className="position-relative rounded-circle bg-light d-flex justify-content-center align-items-center"
-              style={{
-                width: "35px",
-                height: "35px",
-                cursor: "pointer",
-              }}
-            >
-              <FaHeart className="text-secondary" />
-              <span
-                className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-                style={{ fontSize: "10px" }}
-              >
-                4
-              </span>
-            </div>
           </div>
         </div>
       </nav>

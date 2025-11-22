@@ -1,45 +1,73 @@
 import React, { useState } from "react";
 import {
-  FaMapMarkerAlt,
   FaCalendarAlt,
   FaUserAlt,
   FaSearch,
   FaSlidersH,
+  FaHotel,
 } from "react-icons/fa";
 
 export default function SearchForm() {
-  const [destination, setDestination] = useState("");
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
   const [guests, setGuests] = useState("1 Adult");
 
+  // فلاتر الغرف الخاصة بالفندق الواحد
+  const [filters, setFilters] = useState({
+    breakfastIncluded: false,
+    seaView: false,
+    airConditioned: false,
+    roomService: false,
+    kingBed: false,
+  });
+
   const fieldHeight = "48px";
 
+  const handleFilterChange = (e) => {
+    const { name, checked } = e.target;
+    setFilters((prev) => ({ ...prev, [name]: checked }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const hotel = "Grand Hotel - Cairo";
+
+    console.log({
+      hotel,
+      checkIn,
+      checkOut,
+      guests,
+      filters,
+    });
+
+    alert("Searching available rooms with selected preferences!");
+  };
+
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={handleSubmit}>
       {/* ===== صف الحقول ===== */}
       <div className="row g-3 align-items-end justify-content-center">
-        {/* Destination */}
-        <div className="col-lg-2 col-md-6 col-sm-12">
+        {/* اسم الفندق الثابت */}
+        <div className="col-lg-3 col-md-6 col-sm-12">
           <label className="form-label fw-semibold text-secondary mb-1">
-            Destination
+            Hotel
           </label>
           <div className="input-group">
             <span className="input-group-text bg-white border-end-0">
-              <FaMapMarkerAlt className="text-secondary" />
+              <FaHotel className="text-secondary" />
             </span>
             <input
               type="text"
-              className="form-control border-start-0"
-              placeholder="Where are you going?"
-              value={destination}
-              onChange={(e) => setDestination(e.target.value)}
+              className="form-control border-start-0 bg-light"
+              value="Grand  Hotel – Cairo"
+              disabled
               style={{ height: fieldHeight }}
             />
           </div>
         </div>
 
-        {/* Check‑in */}
+        {/* تاريخ الوصول */}
         <div className="col-lg-3 col-md-4 col-sm-6">
           <label className="form-label fw-semibold text-secondary mb-1">
             Check‑in
@@ -54,11 +82,12 @@ export default function SearchForm() {
               value={checkIn}
               onChange={(e) => setCheckIn(e.target.value)}
               style={{ height: fieldHeight }}
+              required
             />
           </div>
         </div>
 
-        {/* Check‑out */}
+        {/* تاريخ المغادرة */}
         <div className="col-lg-3 col-md-4 col-sm-6">
           <label className="form-label fw-semibold text-secondary mb-1">
             Check‑out
@@ -73,11 +102,12 @@ export default function SearchForm() {
               value={checkOut}
               onChange={(e) => setCheckOut(e.target.value)}
               style={{ height: fieldHeight }}
+              required
             />
           </div>
         </div>
 
-        {/* Guests */}
+        {/* عدد النزلاء */}
         <div className="col-lg-2 col-md-4 col-sm-6">
           <label className="form-label fw-semibold text-secondary mb-1">
             Guests
@@ -103,6 +133,7 @@ export default function SearchForm() {
         {/* زر البحث */}
         <div className="col-lg-1 col-md-6 col-sm-12 d-grid">
           <button
+            type="submit"
             className="btn fw-bold text-white"
             style={{
               backgroundColor: "#f59e0b",
@@ -111,31 +142,74 @@ export default function SearchForm() {
             }}
           >
             <FaSearch className="me-2" />
-            Search Hotels
+            Search
           </button>
         </div>
       </div>
 
-      {/* ===== الفلاتر ===== */}
+      {/* ===== قسم الفلاتر ===== */}
       <hr className="my-4" />
-      <div className="d-flex flex-wrap align-items-center justify-content-between">
+      <div className="d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3">
         <div className="d-flex flex-wrap gap-4 text-secondary small">
+          {/* كل اختيار هنا يمثل ميزة خاصة بغرفة الفندق */}
           <label>
-            <input type="checkbox" className="form-check-input me-1" /> Pet‑friendly
+            <input
+              type="checkbox"
+              className="form-check-input me-1"
+              name="breakfastIncluded"
+              checked={filters.breakfastIncluded}
+              onChange={handleFilterChange}
+            />{" "}
+            Breakfast Included
           </label>
+
           <label>
-            <input type="checkbox" className="form-check-input me-1" /> Free WiFi
+            <input
+              type="checkbox"
+              className="form-check-input me-1"
+              name="seaView"
+              checked={filters.seaView}
+              onChange={handleFilterChange}
+            />{" "}
+            Sea View
           </label>
+
           <label>
-            <input type="checkbox" className="form-check-input me-1" /> Pool
+            <input
+              type="checkbox"
+              className="form-check-input me-1"
+              name="airConditioned"
+              checked={filters.airConditioned}
+              onChange={handleFilterChange}
+            />{" "}
+            Air‑Conditioned
           </label>
+
           <label>
-            <input type="checkbox" className="form-check-input me-1" /> Spa
+            <input
+              type="checkbox"
+              className="form-check-input me-1"
+              name="roomService"
+              checked={filters.roomService}
+              onChange={handleFilterChange}
+            />{" "}
+            Room Service
+          </label>
+
+          <label>
+            <input
+              type="checkbox"
+              className="form-check-input me-1"
+              name="kingBed"
+              checked={filters.kingBed}
+              onChange={handleFilterChange}
+            />{" "}
+            King‑Size Bed
           </label>
         </div>
 
         <div
-          className="text-primary fw-semibold d-flex align-items-center mt-3 mt-md-0"
+          className="text-primary fw-semibold d-flex align-items-center"
           style={{ cursor: "pointer", fontSize: "14px" }}
         >
           <FaSlidersH className="me-2" />

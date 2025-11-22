@@ -4,19 +4,19 @@ import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/f
 export default function Footer() {
   return (
     <footer>
-      {/* ======= Subscribe Section ======= */}
+      {/* ======= Stay Connected Section ======= */}
       <section
         style={{
-          background: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%)",
+          background: "linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%)",
           color: "#fff",
           textAlign: "center",
           padding: "60px 20px",
         }}
       >
-        <h3 className="fw-bold mb-3">Stay Updated</h3>
+        <h3 className="fw-bold mb-3">Stay Connected with Grand Hotel</h3>
         <p className="mb-4" style={{ maxWidth: "600px", margin: "0 auto" }}>
-          Subscribe to our newsletter and be the first to know about exclusive
-          deals, new destinations, and travel tips
+          Subscribe to receive our latest offers, upcoming events, and special updates
+          directly from Grand Hotel.
         </p>
 
         <div
@@ -46,16 +46,16 @@ export default function Footer() {
 
         <div className="d-flex justify-content-center text-center gap-4 mt-4 flex-wrap">
           <div>
-            <h5 className="fw-bold">2M+</h5>
-            <p className="small mb-0">Happy Customers</p>
+            <h5 className="fw-bold">25+</h5>
+            <p className="small mb-0">Years of Excellence</p>
           </div>
           <div>
             <h5 className="fw-bold">50K+</h5>
-            <p className="small mb-0">Hotels Partner</p>
+            <p className="small mb-0">Happy Guests</p>
           </div>
           <div>
-            <h5 className="fw-bold">200+</h5>
-            <p className="small mb-0">Countries</p>
+            <h5 className="fw-bold">5⭐</h5>
+            <p className="small mb-0">Rated Hospitality</p>
           </div>
         </div>
       </section>
@@ -70,72 +70,61 @@ export default function Footer() {
       >
         <div className="container">
           <div className="row gy-4">
-            <div className="col-md-3">
+            {/* Hotel Info */}
+            <div className="col-md-4">
               <h5 className="fw-bold text-white mb-3">
-                <span className="me-2">🏨</span>Bookify
+                <span className="me-2">🏨</span>Grand Hotel
               </h5>
               <p className="small">
-                Your trusted partner for finding the perfect accommodation
-                worldwide. Book with confidence and travel with peace of mind.
+                Experience luxury, comfort, and elegance in the heart of Cairo.  
+                Whether you’re here for business or leisure, we make every stay unforgettable.
               </p>
+
               <div className="d-flex gap-3 mt-3">
-                <a href="#" className="text-white">
+                <a href="#" className="text-white" title="Facebook">
                   <FaFacebookF />
                 </a>
-                <a href="#" className="text-white">
+                <a href="#" className="text-white" title="Twitter">
                   <FaTwitter />
                 </a>
-                <a href="#" className="text-white">
+                <a href="#" className="text-white" title="Instagram">
                   <FaInstagram />
                 </a>
-                <a href="#" className="text-white">
+                <a href="#" className="text-white" title="LinkedIn">
                   <FaLinkedinIn />
                 </a>
               </div>
             </div>
 
-            <div className="col-md-2">
-              <h6 className="fw-bold text-white mb-3">Quick Links</h6>
-              <ul className="list-unstyled small">
-                <li>Home</li>
-                <li>Hotels</li>
-                <li>Destinations</li>
-                <li>Deals</li>
-                <li>About Us</li>
-                <li>Contact</li>
-              </ul>
-            </div>
-
-            <div className="col-md-2">
-              <h6 className="fw-bold text-white mb-3">Support</h6>
-              <ul className="list-unstyled small">
-                <li>Help Center</li>
-                <li>Customer Service</li>
-                <li>Cancellation Policy</li>
-                <li>Terms of Service</li>
-                <li>Privacy Policy</li>
-                <li>Cookie Policy</li>
-              </ul>
-            </div>
-
+            {/* Quick Links */}
             <div className="col-md-3">
-              <h6 className="fw-bold text-white mb-3">Contact Info</h6>
-              <ul className="list-unstyled small mb-3">
-                <li>📞  +01065015885</li>
-                <li>✉️  mohamedredac7@gmail.com</li>
-                <li>📍  123 Travel Street, NY 10001</li>
+              <h6 className="fw-bold text-white mb-3">Quick Links</h6>
+              <ul className="list-unstyled small">
+                <li><a href="/" className="text-reset text-decoration-none">Home</a></li>
+                <li><a href="#featured" className="text-reset text-decoration-none">Rooms & Suites</a></li>
+                <li><a href="#offers" className="text-reset text-decoration-none">Offers</a></li>
+                <li><a href="#about" className="text-reset text-decoration-none">About Us</a></li>
+                <li><a href="#contact" className="text-reset text-decoration-none">Contact</a></li>
               </ul>
-              <p className="fw-semibold text-white mb-2">Download Our App</p>
-              <div className="d-flex gap-2">
-                <button className="btn btn-dark btn-sm"> App Store</button>
-                <button className="btn btn-dark btn-sm"> Play Store</button>
-              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className="col-md-5">
+              <h6 className="fw-bold text-white mb-3">Contact Information</h6>
+              <ul className="list-unstyled small mb-3">
+                <li>📞  +20 106 501 5885</li>
+                <li>✉️  info@grandhotel.com</li>
+                <li>📍  Downtown Cairo, Egypt</li>
+              </ul>
+              <p className="small text-secondary mb-1">
+                Open 24 hours a day, 7 days a week
+              </p>
             </div>
           </div>
 
           <hr className="my-4 text-secondary" />
           <p className="small mb-0 text-center">
-            © 2024 Bookify. All rights reserved.
+            © 2024 Grand Hotel. All rights reserved.
           </p>
         </div>
       </section>

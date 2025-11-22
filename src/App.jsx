@@ -4,9 +4,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import PopularDestinations from "./components/PopularDestinations";
-import FeaturedHotels from "./components/FeaturedHotels";
-import ExclusiveDeals from "./components/ExclusiveDeals";
+import Rooms from "./components/Rooms";
+import Offers from "./components/Offers";
 import Footer from "./components/Footer";
 
 import SignIn from "./pages/SignIn";
@@ -20,46 +19,47 @@ function App() {
   return (
     <Router>
       <Routes>
+        {/* الصفحة الرئيسية */}
         <Route
           path="/"
           element={
             <>
               <Navbar />
               <Hero />
-              <PopularDestinations />
-              <FeaturedHotels />
-              <ExclusiveDeals />
-              <About />        
-              <Contact /> 
+              <Rooms />
+              <Offers />
+              <About />
+              <Contact />
               <Footer />
-
-             
-              
-             
             </>
           }
         />
-         <Route
+
+        {/* تسجيل الدخول */}
+        <Route
           path="/signin"
           element={
             <>
               <Navbar />
               <SignIn />
-              <Footer />    
+              <Footer />
             </>
           }
         />
 
+        {/* تسجيل جديد */}
         <Route
           path="/signup"
           element={
             <>
               <Navbar />
               <SignUp />
-              <Footer />   
+              <Footer />
             </>
           }
         />
+
+        {/* نسيان كلمة المرور */}
         <Route
           path="/forgot-password"
           element={
@@ -70,6 +70,8 @@ function App() {
             </>
           }
         />
+
+        {/* صفحة الاتصال */}
         <Route
           path="/contact"
           element={
@@ -80,6 +82,8 @@ function App() {
             </>
           }
         />
+
+        {/* صفحة من نحن */}
         <Route
           path="/about"
           element={
@@ -91,16 +95,10 @@ function App() {
           }
         />
 
-        
+        {/* لوحة تحكم الأدمن */}
         <Route
-          path="/admin"
-          element={
-            <>
-              <Navbar />
-              <AdminDashboard />
-              <Footer />
-            </>
-          }
+          path="/admin-dashboard"
+          element={<AdminDashboard />}
         />
       </Routes>
     </Router>
