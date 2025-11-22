@@ -5,45 +5,63 @@ import { Link, useNavigate } from "react-router-dom";
 export default function SignIn() {
   const navigate = useNavigate();
 
-  // حالة البيانات
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  // بيانات الأدمن الثابتة
+  // بيانات الأدمن
   const ADMIN_EMAIL = "admin@gmail.com";
   const ADMIN_PASSWORD = "Mm12345*#";
 
+  // بيانات اليوزر العادي
+  const USER_EMAIL = "user@gmail.com";
+  const USER_PASSWORD = "Mm12345*#";
+
+  // عند تحميل الصفحة
   useEffect(() => {
-    // لو الأدمن بالفعل داخل (بياناته محفوظة في localStorage)،
-    // يفضل في صفحة الداشبورد حتى بعد الريفرش
-    const user = JSON.parse(localStorage.getItem("user"));
-    if (user && user.role === "admin") {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+
+    if (storedUser && storedUser.role === "admin") {
       navigate("/admin-dashboard");
-    } else if (user && user.role === "user") {
+    } else if (storedUser && storedUser.role === "user") {
       navigate("/");
+    } else {
+      localStorage.removeItem("user");
     }
   }, [navigate]);
 
+  // تسجيل الدخول
   const handleLogin = (e) => {
     e.preventDefault();
 
-    // لو الأدمن
+    if (!email.trim() || !password.trim()) {
+      setError("Please enter both email and password");
+      return;
+    }
+
+    // ✅ تحقق الأدمن
     if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
       const adminUser = { email, role: "admin" };
       localStorage.setItem("user", JSON.stringify(adminUser));
+      // 🔔 حدث لتحديث الـ Navbar فوراً
+      window.dispatchEvent(new Event("user-login"));
       navigate("/admin-dashboard");
       return;
     }
 
-    // لو مستخدم عادي (بأي بيانات أخرى)
-    if (email.trim() && password.trim()) {
+    // ✅ تحقق المستخدم العادي
+    if (email === USER_EMAIL && password === USER_PASSWORD) {
       const normalUser = { email, role: "user" };
       localStorage.setItem("user", JSON.stringify(normalUser));
-      navigate("/"); // يروح للصفحة الرئيسية
-    } else {
-      setError("Incorrect email address or password");
+      // 🔔 نفس الحدث تحديث الـ Navbar
+      window.dispatchEvent(new Event("user-login"));
+      navigate("/");
+      return;
     }
+
+    // ❌ بيانات خاطئة
+    setError("Incorrect email or password");
+    localStorage.removeItem("user");
   };
 
   return (
@@ -114,10 +132,10 @@ export default function SignIn() {
           </button>
         </form>
 
-        {/* رسالة الخطأ */}
+        {/* Error Message */}
         {error && <div className="alert alert-danger text-center">{error}</div>}
 
-        {/* رابط التسجيل */}
+        {/* SignUp Link */}
         <p className="text-center mb-0">
           Don't have an account?{" "}
           <Link to="/signup" className="text-primary fw-semibold">
@@ -125,7 +143,6 @@ export default function SignIn() {
           </Link>
         </p>
 
-        {/* فواصل السوشيال */}
         <div className="d-flex align-items-center my-3">
           <hr className="flex-grow-1" />{" "}
           <span className="text-muted small px-2">Or continue with</span>{" "}
