@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom"; // ✅ أضفنا useNavigate هنا
 import { Link as ScrollLink } from "react-scroll";
 import {
   FaHotel,
@@ -17,6 +17,8 @@ import {
 } from "react-icons/fa";
 
 export default function Navbar() {
+  const navigate = useNavigate(); // ✅ هانستخدمها بدل window.location.href
+
   const [lang, setLang] = useState("English (US)");
   const [currency, setCurrency] = useState("USD");
   const [menuOpen, setMenuOpen] = useState(false);
@@ -42,11 +44,12 @@ export default function Navbar() {
     };
   }, []);
 
+  // ✅ تم تعديل هذا الجزء لمعالجة مشكلة 404 عند الـ Logout
   const handleLogout = () => {
     localStorage.removeItem("user");
     setUser(null);
-    window.dispatchEvent(new Event("user-login")); // يحدّث أي مكونات أخرى
-    window.location.href = "/signin";
+    window.dispatchEvent(new Event("user-login"));
+    navigate("/signin"); // ✅ بدلاً من window.location.href = "/signin"
   };
 
   return (
@@ -69,16 +72,16 @@ export default function Navbar() {
         style={{ color: "#555", fontSize: "14px" }}
       >
         <div className="container d-flex justify-content-between align-items-center flex-wrap gap-2 flex-column flex-md-row">
-          {/* Hotel Logo */}
+          {/* شعار الفندق */}
           <div className="d-flex align-items-center flex-wrap gap-4">
             <span className="fw-bold text-primary d-flex align-items-center">
               <FaHotel className="me-2 fs-4" /> Grand Hotel
             </span>
           </div>
 
-          {/* Right side */}
+          {/* يمين التوب بار */}
           <div className="d-none d-md-flex align-items-center flex-wrap gap-3">
-            {/* Language */}
+            {/* اللغة */}
             <div className="dropdown">
               <button
                 className="btn btn-sm dropdown-toggle text-secondary"
@@ -107,7 +110,7 @@ export default function Navbar() {
               </ul>
             </div>
 
-            {/* Currency */}
+            {/* العملة */}
             <div className="dropdown">
               <button
                 className="btn btn-sm dropdown-toggle text-secondary"
@@ -128,7 +131,7 @@ export default function Navbar() {
               </ul>
             </div>
 
-            {/* ✅ If User Logged In – Show Email + Logout */}
+            {/* ✅ إذا المستخدم داخل كـ user */}
             {user && user.role === "user" ? (
               <div className="d-flex align-items-center gap-2">
                 <span className="fw-semibold text-secondary small">
@@ -170,7 +173,7 @@ export default function Navbar() {
       {/* ======= Main Navbar ======= */}
       <nav className="py-3">
         <div className="container d-flex justify-content-between align-items-center">
-          {/* Mobile */}
+          {/* زر الهامبرجر للموبايل */}
           <div className="d-flex align-items-center gap-2 d-md-none">
             <button
               className="btn"
@@ -181,7 +184,7 @@ export default function Navbar() {
             </button>
           </div>
 
-          {/* Menu Items */}
+          {/* عناصر القائمة */}
           <ul
             className={`nav flex-column flex-md-row align-items-md-center mb-0 ${
               menuOpen ? "d-flex" : "d-none d-md-flex"
@@ -215,8 +218,8 @@ export default function Navbar() {
                 duration={800}
                 offset={-70}
                 className="nav-link fw-semibold text-dark"
-                onClick={() => setMenuOpen(false)}
                 style={{ cursor: "pointer" }}
+                onClick={() => setMenuOpen(false)}
               >
                 <FaBuilding className="me-1" /> Rooms
               </ScrollLink>
@@ -229,8 +232,8 @@ export default function Navbar() {
                 duration={800}
                 offset={-70}
                 className="nav-link fw-semibold text-dark"
-                onClick={() => setMenuOpen(false)}
                 style={{ cursor: "pointer" }}
+                onClick={() => setMenuOpen(false)}
               >
                 <FaTags className="me-1" /> Offers
               </ScrollLink>
@@ -243,8 +246,8 @@ export default function Navbar() {
                 duration={800}
                 offset={-70}
                 className="nav-link fw-semibold text-dark"
-                onClick={() => setMenuOpen(false)}
                 style={{ cursor: "pointer" }}
+                onClick={() => setMenuOpen(false)}
               >
                 <FaInfoCircle className="me-1" /> About
               </ScrollLink>
@@ -257,15 +260,15 @@ export default function Navbar() {
                 duration={800}
                 offset={-70}
                 className="nav-link fw-semibold text-dark"
-                onClick={() => setMenuOpen(false)}
                 style={{ cursor: "pointer" }}
+                onClick={() => setMenuOpen(false)}
               >
                 <FaHeadset className="me-1" /> Contact
               </ScrollLink>
             </li>
           </ul>
 
-          {/* Search */}
+          {/* البحث */}
           <div
             className={`align-items-center gap-3 ${
               menuOpen
